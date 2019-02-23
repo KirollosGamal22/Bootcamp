@@ -14,7 +14,11 @@
 #define OCR0  (*(volatile uint8*)(0x5C))
 #define TIFR  (*(volatile uint8*)(0x58))
 #define TIMSK (*(volatile uint8*)(0x59))
+#define SREG (*(volatile uint8*)(0x5F))
+#define GICR (*(volatile uint8*)(0x5B))
 
+
+#define G_INTERRUPT 7
 typedef enum TCCR0_REG_t{
 	CS00=0,
 	CS01,
@@ -26,11 +30,24 @@ typedef enum TCCR0_REG_t{
 	FOC0
 }TCCR0_REG;
 
-typedef enum PRESCALLER_t{
-	NO_PRESCALLER=1,
-	PRESCALLER_8,
-	PRESCALLER_64,
-	PRESCALLER_256,
-	PRESCALLER_1024
-	}PRESCALLER_t;
+typedef enum TIFR_REG_t{
+		TOV0=0,
+		OCF0 ,
+		TOV1 ,
+		OCF1B ,
+		OCF1A ,
+		ICF1 ,
+		TOV2,
+		OCF2
+	}TIFR_REG_t;
+
+typedef enum TIMSK_REG_t{
+	TOIE0=0,
+	OCIE0,
+	TOIE1,
+	OCIE1B,
+	OCIE1A,
+	TICIE2,
+	OCIE2
+	}TIMSK_REG_t;
 #endif /* CONFIG_H_ */
