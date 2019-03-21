@@ -7,34 +7,43 @@
 #include <stdint.h>
 #include "Manager.h"
 #include "FSM.h"
+/*******************************************/
+/*the used MARCROS*/
+#define ZERO 0
+#define NUM_160 160
+#define NUM_90 90
+#define NUM_255 255
+#define NUM_20 20
+#define NUM_5 5
+/*******************************************/
 uint8_t FSM(uint8_t distance)
 {
 //uint8_t distance = Get_Distance();
 uint8_t state=0 ;
 
-if((distance <= 160) && (distance>90))
+if((distance <= NUM_160) && (distance>NUM_90))
 {
-    state=1; /*Maintain speed*/
+    state=STATE_ONE_t; /*Maintain speed*/
 }
 
-else if((distance<= 255) && (distance > 160)  )
+else if((distance<= NUM_255) && (distance > NUM_160)  )
 {
-    state=2; /*increase speed*/
+    state=STATE_TWO_t; /*increase speed*/
 }
 
-else if((distance > 20) && (distance <= 90)  )
+else if((distance > NUM_20) && (distance <= NUM_90)  )
 {
-    state=3; /*decrease speed*/
+    state=STATE_THREE_t; /*decrease speed*/
 }
 
-else if((distance > 5) && (distance <= 20)  )
+else if((distance > NUM_5) && (distance <= NUM_20)  )
 {
-    state=4; /*break speed*/
+    state=STATE_FOUR_t; /*break speed*/
 }
 
-else if((distance == 0) && (distance <= 5)  )
+else if((distance == ZERO) && (distance <= NUM_5)  )
 {
-    state=5; /*fire speed*/
+    state=STATE_FIVE_t; /*fire speed*/
 }
 
 return state;/* return state */

@@ -47,8 +47,8 @@ void SPI_Init(uint8_t channel)
       }
       case NUM_3:
                  {
-                     SysCtlPeripheralEnable(SYSCTL_PERIPH_SSI3);  //Enable ssi2
-                                  SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD); //Enable PORT B GPIO to be used with ssi2 data and frame signals
+                     SysCtlPeripheralEnable(SYSCTL_PERIPH_SSI3);  //Enable ssi3
+                                  SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD); //Enable PORT D GPIO to be used with ssi3 data and frame signals
 
                                   GPIOPinConfigure(GPIO_PD0_SSI3CLK);
                                   GPIOPinConfigure(GPIO_PD1_SSI3FSS);
@@ -71,7 +71,7 @@ uint32_t SPI_Transmit (uint32_t ui32Data)
 {
   uint32_t Succes =FALSE;
 
-  Succes=SSIDataPutNonBlocking(SSI3_BASE ,ui32Data);
+  Succes=SSIDataPutNonBlocking(SSI0_BASE ,ui32Data);
 
   return Succes;
 
@@ -79,9 +79,9 @@ uint32_t SPI_Transmit (uint32_t ui32Data)
 
 uint32_t SPI_Recieve (uint32_t* ui32Data)
 {
-  uint32_t Succes =TRUE;
+  uint32_t Succes =FALSE;
 
-  SSIDataGet(SSI3_BASE,ui32Data);
+  Succes=SSIDataGetNonBlocking(SSI3_BASE,ui32Data);
 
   return Succes;
 

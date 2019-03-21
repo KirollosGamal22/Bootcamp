@@ -49,15 +49,16 @@ void UART_Send(uint8_t data)
     */
         UARTCharPut(UART0_BASE, data);
 }
-uint8_t first_recieve=1;
+uint8_t first_recieve=1;/*flag to check if the buffer is clean or not if ==1 its not clean */
 
 uint8_t UART_Recive(void)
 {
     uint8_t data=0 ;
     if (first_recieve&UARTCharsAvail(UART0_BASE))
     {
+        /*to clear the buffer for UART we read the buffer and store data in data variable */
         data = UARTCharGetNonBlocking(UART0_BASE);
-        first_recieve=0;
+        first_recieve=0;/*clear the buffer flag */
     }
     /*wait until the data buffer FIFO is empty and i can send or receive */
     while(!UARTCharsAvail(UART0_BASE)){};
